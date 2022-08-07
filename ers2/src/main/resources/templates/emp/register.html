@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登録</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/updateStyle.css}" rel="stylesheet">
+	<link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    
+    <script th:src="@{/js/common.js}"></script>
+
+</head>
+
+<body>
+	  	<header>
+  	
+			<nav class="navbar navbar-light bg-dark container-fluid">
+  				<span class="navbar-brand mb-0 h1 text-white">ers</span>
+			</nav>
+	
+  		</header>
+
+  	<div class="main">
+    		<div class="registerformhead">
+  		   			<p style="font-size: 30px;">社員登録</p>
+
+            		<a class="far fa-arrow-alt-circle-left" id="back" href="/emp/list"></a> 戻る
+        		<hr>
+        
+    		</div>
+    					
+      
+      <!-- th:field = id name text -->
+
+  			<div class="container">
+   					<div class="registerform">
+				<form id="register-form" th:action="@{/emp/register}"
+					th:object="${registerForm}" method="post">
+
+					<div class="row">
+						<div class="form-group">
+							<label for="lastName">姓</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{lastName}"
+									placeholder="山田" data-error_place="#lastNameError" th:errorclass="is-invalid"> <span
+									id="lastNameError"></span>
+							<p class="invalid-feedback" th:errors="*{lastName}"></p>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label for="firstName">名</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{firstName}"
+									placeholder="太郎" data-error_place="#firstNameError" th:errorclass="is-invalid"> <span
+									id="firstNameError"></span>
+								<p class="invalid-feedback" th:errors="*{firstName}"></p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<span id="genderError"></span>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" th:field="*{gender}"
+								value="男" checked data-error_place="#genderError"> <label
+								class="form-check-label" for="gender"> 男 </label>
+						</div>
+
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio" th:field="*{gender}"
+								value="女" data-error_place="#genderError"> <label
+								class="form-check-label" for="gender"> 女 </label>
+						</div>
+
+
+						<div class="form-group">
+							<label for="department">部署</label>
+							<div class="col-sm-12">
+								<select class="form-control" th:field="*{dept}">
+									<option value="G1">G1</option>
+									<option value="G2">G2</option>
+									<option value="G3">G3</option>
+									<option value="G4">G4</option>
+									<option value="G5">G5</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label for="birthday">誕生日</label>
+							<div class="col-sm-11">
+								<input type="date" class="form-control" th:field="*{birth}"
+									data-error_place="#birthError"> <span id="birthError"></span>
+							</div>
+						</div>
+
+
+
+						<div class="form-group">
+							<label for="email">メールアドレス</label>
+							<div class="col-sm-10">
+								<input type="email" class="form-control" th:field="*{email}"
+									placeholder="aaa@co.jp" data-error_place="#emailError" th:errorclass="is-invalid">
+								<span id="emailError"></span>
+								<p id="error1" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+								<p class="invalid-feedback" th:errors="*{email}"></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label for="phoneNumber">電話番号</label>
+							<div class="col-sm-10">
+								<input type="tel" class="form-control" th:field="*{tel}"
+									placeholder="09010001000" data-error_place="#telError">
+								<span id="telError"></span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="zipcode">郵便番号</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{zipcode}"
+									placeholder="1000001" data-error_place="#zipcodeError">
+								<span id="zipcodeError"></span>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="address1">住所</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" th:field="*{address1}"
+								placeholder="東京都武蔵野吉祥寺" data-error_place="#address1Error" th:errorclass="is-invalid">
+							<span id="address1Error"></span>
+							<p class="invalid-feedback" th:errors="*{address1}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label for="address2">住所２</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{address2}"
+									placeholder="本町１－１－１" data-error_place="#address2Error" th:errorclass="is-invalid">
+									<span id="address2Error"></span>
+								<p class="invalid-feedback" th:errors="*{address2}"></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="address3">住所３</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{address3}"
+									placeholder="マンション名" data-error_place="#address3Error">
+									<span id="address3Error"></span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<label for="shcool">学校名</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{school1}"
+									placeholder="A大学" data-error_place="#school1Error" th:errorclass="is-invalid"> <span
+									id="school1Error"></span>
+									<p class="invalid-feedback" th:errors="*{school1}"></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="school2">学部学科</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" th:field="*{school2}"
+									placeholder="A学部A学科" data-error_place="#school2Error">
+									<span id="school2Error"></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="skill">特技</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" th:field="*{skill}"
+								data-error_place="#skillError" th:errorclass="is-invalid"> <span id="skillError"></span>
+								<p class="invalid-feedback" th:errors="*{skill}"></p>
+						</div>
+					</div>
+
+					<button type="submit" class="btn btn-primary">登録</button>
+
+				</form>
+			</div>	
+		</div>
+		
+	</div>
+	
+</body>
+</html>

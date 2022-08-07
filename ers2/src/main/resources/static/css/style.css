@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300;400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+	z-index: 20;
+	position: fixed;
+	width: 100%;
+}
+
+.navbar-brand {
+    font-size: 25px;
+}
+
+#logout{
+	color: white;
+}
+
+
+.buttonarea {
+	display: flex;
+	justify-content: space-between;
+	height: 100;
+}
+
+.registerform {
+	position: fixed;
+    top: 63px;
+    left: -450px;
+    background: #F0F8FF;
+    width: 450px;
+    transition: all 0.5s;
+    height: 80%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.registerform header {
+	position: fiexd;
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    background: gray;    
+}
+
+.registerform form {
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.registerform form button{
+    margin-bottom: 40px;
+    margin-right: 20px;
+    float: right;
+}
+
+/* toggle section */
+#check {
+    display: none;
+}
+
+
+label #plusbutton,
+label #batubutton {
+    position: fixed;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
+
+label #plusbutton {
+	z-index: 30;
+    left: 320px;
+    top: 10px;
+    font-size: 25px;
+    color: gray;
+    padding: 10px 6px;
+    
+}
+
+#check:checked ~ .registerform{
+    left: 0;
+}
+
+
+#check:checked ~ label #batubutton{
+    left: 350px;
+}
+
+#form2 {
+	z-index:30;
+    position: fixed;
+    left: 60px;
+    top: 14px;
+}
+
+.mainmain {
+	padding-top: 70px;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70%;
+}
+
+
+.main2{
+	display: flex;
+	justify-content: center;
+	 height: 100%;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+#tableframe{
+	width: 95%;
+	overflow-y: scroll;
+    background-color: white;
+}
+
+th{
+	font-size: 10px;
+}
+
+td{
+	word-wrap: break-word;
+	font-size: 10px;
+}
+
+.main3 {
+	padding-top: 80px;
+}
+
+.main3 p{
+    	display: flex;
+	   justify-content: center;
+}
+
+.loglisthead {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70%;
+
+}
+#back {
+    font-size: 25px;
+    text-decoration: none ;
+}
+
+
+
+

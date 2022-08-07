@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メインページ</title>
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登録</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+	<nav class="navbar navbar-light bg-dark">
+  		<span class="navbar-brand mb-0 h1 text-white">ers</span>
+	</nav>
+  </header>
+  
+ <div class="main3">
+ 
+  		<div class="loglisthead">
+  					<p style="font-size: 30px;">削除者一覧</p>
+  
+      			<form th:action="@{/loginfo/loglist}" method="get">
+  								<button type="submit" class="btn btn-link" id="back"><a class="far fa-arrow-alt-circle-left"></a></button>
+  				</form>
+  				
+  				<form th:action="@{/backup/truncate}" method="post">
+								<button type="submit" class="btn btn-info float-right">truncate</button>
+				</form>
+  				
+        
+        
+  			<div class="container" style="margin-top: 20px">
+  						<h6>行数</h6>
+  				<div class="form-group">
+  						<select name="state" id="maxRows" class="form-control"
+  								style="height: 33px; width: 65px;">
+  								<option value="5000">-</option>
+  								<option value="5">5</option>
+  								<option value="10">10</option>
+  								<option value="15">15</option>
+  						</select>
+  				</div>
+  			</div>
+  		</div>
+
+		<div class="loglisttable container">
+			<table class="table table-striped" id="sort-table">
+				<thead>
+					<tr>
+						<th scope="col">削除日付</th>
+						<th scope="col" width="80">姓</th>
+						<th scope="col">名</th>
+						<th scope="col">性別</th>
+						<th scope="col">部署</th>
+						<th scope="col">誕生日</th>
+						<th scope="col" width="80">メールアドレス</th>
+						<th scope="col">電話番号</th>
+						<th scope="col">郵便番号</th>
+						<th scope="col" width="80">住所</th>
+						<th scope="col">学歴</th>
+						<th scope="col">特技</th>
+						<th scope="col" data-sorter="false">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="deletedEmployee : ${deletedEmployees}">
+						<td class="text-nowrap" th:text="${deletedEmployee.dateTime}"></td>
+						<td class="text-nowrap" th:text="${deletedEmployee.lastName}"></td>
+						<td th:text="${deletedEmployee.firstName}"></td>
+						<td th:text="${deletedEmployee.gender}"></td>
+						<td th:text="${deletedEmployee.dept}"></td>
+						<td th:text="${deletedEmployee.birth}"></td>
+						<td th:text="${deletedEmployee.email}"></td>
+						<td th:text="${deletedEmployee.tel}"></td>
+						<td th:text="${deletedEmployee.zipcode}"></td>
+						<td
+							th:text="|${deletedEmployee.address1}${deletedEmployee.address2}${deletedEmployee.address3}|"></td>
+						<td th:text="|${deletedEmployee.school1}${deletedEmployee.school2}|"></td>
+						<td th:text="${deletedEmployee.skill}"></td>
+						<td>
+							<form class="form1 d-inline"
+								th:action="@{'/backup/reverse/' + ${deletedEmployee.id}}" method="post">
+								<input type="hidden" name="id" th:value="${deletedEmployee.id}">
+								<button type="submit" id="button4"
+									class="btn btn-primary btn-sm">戻す</button>
+							</form>
+						</td>
+			      </tr>
+
+				</tbody>
+			</table>
+
+			<div class="pagination-container float-right">
+				<nav aria-label="Page navigation">
+					<ul class="pagination"></ul>
+				</nav>
+			</div>
+
+			<script type="text/javascript">
+				$(function() {
+					let table = "#sort-table";
+					$('#maxRows')
+							.on(
+									'change',
+									function() {
+										$(".pagination").html(' ');
+										let trNo = 0;
+										let maxRows = parseInt($(this).val());
+										let totalRows = $(table + " tbody tr").length;
+										$(table + " tr:gt(0)").each(function() {
+											trNo++;
+											if (trNo > maxRows) {
+												$(this).hide();
+											}
+											if (trNo <= maxRows) {
+												$(this).show();
+											}
+										});
+
+										if (totalRows > maxRows) {
+											let pageNo = Math.ceil(totalRows
+													/ maxRows);
+											for (let i = 1; i <= pageNo;) {
+												$('.pagination')
+														.append(
+																'<li class="page-item" data-page="'　+ i + '" >\<span class="page-link">'
+																		+ i++
+																		+ '<span class="sr-only">(current)</span></span>\</li>')
+														.show();
+											}
+											;
+										}
+										;
+
+										$('.pagination li:first-child')
+												.addClass('active');
+										$('.pagination li')
+												.on(
+														'click',
+														function() {
+															let pageNo = $(this)
+																	.attr(
+																			'data-page');
+															let trIndex = 0;
+															$('.pagination li')
+																	.removeClass(
+																			'active');
+															$(this).addClass(
+																	'active');
+															$(
+																	table
+																			+ " tr:gt(0)")
+																	.each(
+																			function() {
+																				trIndex++
+																				if (trIndex > (maxRows * pageNo)
+																						|| trIndex <= ((maxRows * pageNo) - maxRows)) {
+																					$(
+																							this)
+																							.hide();
+																				} else {
+																					$(
+																							this)
+																							.show();
+																				}
+																			});
+														});
+									});
+				});
+			</script>
+
+
+
+
+		</div>
+
+	</div>
+</body>
+</html>

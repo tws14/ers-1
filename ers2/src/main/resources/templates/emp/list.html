@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+			xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>メインページ</title>
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登録</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <link  th:href="@{/css/style2.css}" rel="stylesheet">
+    	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js"></script>
+
+	
+</head>
+<body>
+
+  <header>
+  	
+		<nav class="navbar navbar-light bg-dark container-fluid width=100%">
+  			<span class="navbar-brand mb-0 h1 text-white">ers</span>
+  			
+  			<div class="row">
+  				<p class="text-white mt-2" th:text="${#authentication.principal.username}"></p>
+  				
+             	<form th:action="@{/logout}" method="POST">
+ 					<button class="btn btn-link" id="logout"><i class="fas fa-sign-out-alt"></i></button>
+ 				</form>
+  			</div>	
+		</nav>
+	
+  </header>
+  
+ 
+				<!-- th:field = id name text -->
+          <input type="checkbox" id="check">
+          <label for="check">
+             <i class="fas fa-plus-circle" id="plusbutton"></i>
+          </label>
+
+ 		<div th:replace="/emp/searchForm :: searchForm"></div>
+  	
+   				<form id="form2" th:action="@{searchAll}" method="get">
+  				<input type="text" class="searchall" id="searchall" name="searchall">
+  				<button type="submit" id="button2" class="btn btn-secondary">検索</button>
+  				</form>
+  				
+  				<script >
+  			$(function(){
+  					$("#button2").click(function(event){
+  						event.preventDefault();				
+  						$.ajax({
+  							type: "GET",
+  							url: "/emp/searchAll",
+  							data: {searchall: $('#searchall').val() },
+  							dataType: "html",
+  						}).done(function(data, textStatus, jqXHR){
+  							$(".main2").html(data);
+  						}).fail(function(jqXHR, textStatus, errorThrown){
+  							console.log("error");
+  						});
+  							
+  					
+  					});	
+  					
+  				}); 
+  						
+  				</script>
+ 
+ 
+  <div class="mainmain">
+  		 <div class="buttonarea">
+  			 <div class="form-row">
+  				<form th:action="@{/emp/register}" method="get">
+  								<button type="submit" class="btn btn-primary">社員登録</button>
+				</form>
+  				
+  				
+    			<form th:action="@{/loginfo/loglist}" method="get" sec:authorize="hasRole('ADMIN')">
+  								<button type="submit" class="btn btn-info ml-1">ログ</button>
+  				</form>
+  			 </div>	
+  				<div class="form-row">
+  				<form th:action="@{/csv/employee.csv}" method="get">
+  								<input type="hidden" name="employees" th:value="${employees}">
+  								<button type="submit" class="btn btn-dark" style="width:50px">DL</button>
+  				</form>
+  				 <button class="modal-open btn btn-secondary" id="js-open" style="width:50px">IMP</button>
+  				 <p id="error1" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+  				 <p id="error1" th:if="${message}" th:text="${message}" ></p>
+  				</div>
+  			
+  			</div>	
+  			
+  	            <br>
+           <!-- modal -->
+            <div class="overlay" id="js-overlay"></div>
+            <div class="modal" id="js-modal">
+                
+                <div class="modal-close-wrap">
+                    <button class="modal-close" id="js-close">
+                    <span></span>
+                    <span></span>
+                    </button>
+                
+                </div>
+               <p>CSVインポート</p> 
+        		<form th:action="@{/emp/import}" th:object="${multipartForm}" enctype="multipart/form-data" method="post">
+  					<input type="file" name="file" th:field="*{file}">
+                    <hr>
+  					<input type="submit" name="upload_file" value="アップロード">
+  				</form>
+            </div>
+               
+         
+          
+			<div class="container">
+						<h6>行数</h6>
+				<div class="form-group">
+					<select name="state" id="maxRows" class="form-control" style="height: 33px; width: 65px;">
+						<option value="5000">-</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+					</select>
+				</div>
+			</div>
+
+
+           <script type="text/javascript">
+                $(function() {
+                    const modal = $("#js-modal");
+                    const overlay = $("#js-overlay");
+                    const close = $("#js-close");
+                    const open = $("#js-open");
+                    
+                    open.on('click', function() {
+                        modal.addClass("open");
+                        overlay.addClass("open");
+                    });
+                    
+                    close.on('click', function(){
+                        modal.removeClass("open");
+                        overlay.removeClass("open");
+                    });
+                });
+               
+            </script>  
+	</div>
+	
+  		<div class="main2">
+			 		<div th:replace="/emp/employeeTable :: employeeTable"></div>
+		</div>
+
+	 
+
+</body>
+</html>

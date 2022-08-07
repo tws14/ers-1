@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html　xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>詳細</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+	<nav class="navbar navbar-light bg-dark">
+  		<span class="navbar-brand mb-0 h1 text-white">ers</span>
+	</nav>
+  </header>
+  <div class="container">
+  
+  <a th:href="@{/emp/list}">戻る</a>
+
+      <p th:text="${employee.lastName}"></p>
+      <p th:text="${employee.firstName}"></p>
+      <p th:text="${employee.gender}"></p>
+      <p th:text="${employee.dept}"></p>
+      <p th:text="${employee.birth}"></p>
+      <p th:text="${employee.email}"></p>
+      <p th:text="${employee.tel}"></p>
+      <p th:text="${employee.zipcode}"></p>
+      <p th:text="|${employee.address1}${employee.address2}${employee.address3}|"></p>
+      <p th:text="|${employee.school1}${employee.school2}|"></p>
+      <p th:text="${employee.skill}"></p>
+
+  </div>
+  
+  <div>
+  	 <form th:action="@{'/emp/updateForm/' + ${employee.id}}" method="get">
+  	 <input type="hidden" name="employee" th:value="${employee.id}">
+  	 <button type="submit" class="btn btn-secondary">編集</button>
+  	 </form>
+  </div>
+
+</body>
+</html>

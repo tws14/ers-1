@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300;400&display=swap');
+
+header {
+	z-index: 20;
+	position: fixed;
+	width: 100%;
+}
+
+.navbar-brand {
+    font-size: 25px;
+}
+
+.main{
+    padding-top: 80px;
+}
+
+.main p{
+    	display: flex;
+	   justify-content: center;
+}
+
+.registerformhead {
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 70%;
+}
+#back {
+    font-size: 25px;
+    text-decoration: none ;
+}
+
+.detaillist {
+    display: flex;
+    justify-content: center;
+    width: 65%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 60%;
+    
+}
+
+.propblock {
+flex-grow: 2;
+}
+
+.prop{
+    margin-bottom: 15px;
+    white-space: nowrap;
+
+}
+
+.detailsblock{
+    flex-grow: 3;
+}
+
+.details{
+    margin-bottom: 15px;
+    white-space: nowrap;
+}
+.addressgyou {
+    margin-bottom: 55px;
+}
+
+.buttonarea{
+    display: flex;
+    justify-content: center;
+    width: 65%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+#sakujo{
+    margin-left: 50px;
+}

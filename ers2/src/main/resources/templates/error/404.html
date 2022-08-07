@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>404Error</title>
+</head>
+<body>
+	<h1 th:text="${status}"></h1>
+	<h2 th:text="${error}"></h2>
+	<p th:text="${message}"></p>
+	<p style="color: red">ページが存在しません</p>
+	<form th:action="@{/emp/list}" method="GET">
+	
+	<button type="submit">戻る</button>
+	
+	</form>
+</body>
+</html>

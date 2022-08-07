@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title></title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+    <link  th:href="@{/css/style2.css}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+
+</head>
+<body>
+
+   <div  th:fragment="searchForm" class="registerform">
+   <!-- th:action="@{/emp/andSearch}"  method="get" --> 
+ 	<form id="register-form" th:object="${registerForm}" th:action="@{/emp/andSearch}" method="get" >
+ 	   
+ 	   <div class="form-row">
+ 	  	<div class="form-group">
+    		<label for="lastName">姓</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{lastName}" placeholder="sei">
+    		</div>
+  	    </div>
+  	  	<div class="form-group">
+    		<label for="firstName">名</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{firstName}"  placeholder="mei">
+    		</div>
+  		</div>
+  	   </div>
+  	   
+   <div class="form-row">   
+  	 <div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="男" checked>
+   			<label class="form-check-label" for="gender">
+   			男
+   　		</label>
+	</div>
+
+	<div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="女">
+   			<label class="form-check-label" for="gender">
+  			 女
+   			</label>
+	</div>
+  <div class="form-group">
+    <label for="department">部署</label>
+    <div class="col-sm-12">
+    <select class="form-control-sm" th:field="*{dept}">
+      <option value="">---</option>
+      <option value="G1">G1</option>
+      <option value="G2">G2</option>
+      <option value="G3">G3</option>
+      <option value="G4">G4</option>
+      <option value="G5">G5</option>
+    </select>
+    </div>
+  </div>
+ </div>
+  
+	<div class="form-row">
+  		<div class="form-group">
+    		<label for="birthday">誕生日</label>
+    		<div class="col-sm-10">
+    		<input type="date" class="form-control-sm" th:field="*{birth}" placeholder="2001/01/01">
+    		</div>
+  		</div>
+  
+  
+  
+  	  	<div class="form-group">
+    		<label for="email">メールアドレス</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{email}" placeholder="email">
+    		</div>
+  		</div>
+    </div>
+    
+    <div class="form-row">
+  		<div class="form-group">
+    		<label for="phoneNumber">電話番号</label>
+    		<div class="col-sm-10">
+    		<input type="tel" class="form-control-sm" th:field="*{tel}" placeholder="00000000000">
+    		</div>
+  		</div>
+ 	
+  		<div class="form-group">
+    		<label for="zipcode">郵便番号</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{zipcode}" placeholder="1111111">
+    		</div>
+  		</div>
+  	</div>
+	
+	
+  		<div class="form-group">
+    		<label for="address1">住所</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{address1}" placeholder="東京都三鷹市">
+    		</div>
+  		</div>
+  	<div class="form-row">
+  		<div class="form-group">
+    		<label for="address2">住所２</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{address2}" placeholder="１－１－１">
+    		</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="address3">住所３</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{address3}" placeholder="マンション名">
+    		</div>
+  		</div>
+  	</div>
+  	<div class="form-row">
+  		<div class="form-group">
+    		<label for="shcool">学校名</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{school1}" placeholder="aa大学">
+    		</div>
+  		</div>
+  		<div class="form-group">
+    		<label for="school2">学部学科</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{school2}" placeholder="a学部">
+    		</div>
+  		</div>
+  	</div>
+  		<div class="form-group">
+    		<label for="skill">特技</label>
+    		<div class="col-sm-10">
+    		<input type="text" class="form-control-sm" th:field="*{skill}">
+    		</div>
+  		</div>
+
+  	<button type="button" id="button1" class="btn btn-primary">検索</button>
+  	
+  	<br>
+
+	 <script type="text/javascript">
+	
+		 $(function (){
+		
+			
+			$(document).on('click', '#button1' , function(event) {
+				event.preventDefault();
+			$.ajax({
+				url: "/emp/andSearch",
+				type: "GET",
+				cache: false,
+				data: $("form").serialize(),
+				dataType: "html",
+				timeout: 6000,
+			}).done(function(data, textStatus, jqXHR){
+				$('.main2').html(data);
+				
+			}).fail(function(jqXHR, textStatus, errorThrown){
+				console.log('form invalid');
+			});
+
+			
+			});
+		}); 
+				
+			
+	</script>
+
+  
+  
+  
+	</form>
+	
+	
+	</div>
+
+
+
+</body>
+</html>

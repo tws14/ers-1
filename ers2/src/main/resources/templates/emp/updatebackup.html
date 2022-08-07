@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html　xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登録</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/updateStyle.css}" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    
+    	<script th:src="@{/js/common.js}"></script>
+	
+</head>
+
+<body>
+  <header>
+	<nav class="navbar navbar-light bg-dark">
+  		<span class="navbar-brand mb-0 h1 text-white">ers</span>
+	</nav>
+  </header>
+  		<br>
+		<div class="title">
+		登録
+		</div>
+		
+		<a th:href="@{/emp/list}">戻る</a>
+		
+		<br>
+								<!-- th:field = id name text -->
+  <div class="container">	
+   <div class="updateform">
+ 	<form id="register-form" th:action="@{/emp/update}" th:object="${employee}" enctype="multipart/form-data" method="post">
+ 			
+ 		<img id="imageView" th:src="*{encodeBase64}" width="100" height="100" alt="">
+ 	  	
+ 	  	<input type="file" th:field="*{imageForm}" accept="image/*" onchange="changedImage(this);">
+ 	  	
+ 	  	<script>
+ 	  		function changedImage(img)
+ 	  		{
+ 	  			var fileReader = new FileReader();
+ 	  			fileReader.onload = (function() {
+ 	  				document.getElementById('imageView').src = fileReader.result;
+ 	  			});
+ 	  			fileReader.readAsDataURL(img.files[0]);
+ 	  		} 	  	
+ 	  	</script>
+ 	  	
+ 	  	
+ 	  	
+ 
+ 	  	<div class="form-group">
+    		<label for="lastName">姓</label>
+    		<input type="text" class="form-control" th:field="*{lastName}">
+  	    </div>
+  	  	<div class="form-group">
+    		<label for="firstName">名</label>
+    		<input type="text" class="form-control" th:field="*{firstName}">
+  		</div>
+  		
+  		<!-- 条件 -->
+  	 <th:block th:if="*{gender == '男'}">
+  	 <div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="男" checked>
+   			<label class="form-check-label" for="gender">
+   			男
+   　		</label>
+	</div>
+	</th:block>
+	
+	 <th:block th:if="*{gender == '女'}">
+  	 <div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="男">
+   			<label class="form-check-label" for="gender">
+   			男
+   　		</label>
+	</div>
+	</th:block>
+	
+
+	
+	<!-- 条件 -->
+	<th:block th:if="*{gender == '女'}">
+	<div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="女"checked>
+   			<label class="form-check-label" for="gender">
+  			 女
+   			</label>
+	</div>
+	</th:block>
+	<th:block th:if="*{gender == '男'}">
+	<div class="form-check form-check-inline">
+   			<input class="form-check-input" type="radio" th:field="*{gender}" value="女">
+   			<label class="form-check-label" for="gender">
+  			 女
+   			</label>
+	</div>
+	</th:block>
+	
+  <div class="form-group">
+    <label for="department">部署</label>
+    <select class="form-control" th:field="*{dept}">
+    
+    <th:block th:if="*{dept == '1'}">
+      <option value="1" selected>1</option>
+    </th:block>
+    <th:block th:if="*{dept != '1'}">
+      <option value="1">1</option>
+    </th:block>
+ 
+    <th:block th:if="*{dept == '2'}">
+      <option value="2" selected>2</option>
+    </th:block>
+    <th:block th:if="*{dept != '2'}">
+      <option value="2">2</option>
+    </th:block>
+    
+    <th:block th:if="*{dept == '3'}">
+      <option value="3" selected>3</option>
+    </th:block>
+    <th:block th:if="*{dept != '3'}">
+      <option value="3">3</option>
+    </th:block>
+    
+    <th:block th:if="*{dept == '4'}">
+      <option value="4" selected>4</option>
+    </th:block>
+    <th:block th:if="*{dept != '4'}">
+      <option value="4">4</option>
+    </th:block>
+
+    
+    <th:block th:if="*{dept == '5'}">
+      <option value="5" selected>5</option>
+    </th:block>
+    <th:block th:if="*{dept != '5'}">
+      <option value="5">5</option>
+    </th:block>
+
+    </select>
+  </div>
+
+  		<div class="form-group">
+    		<label for="birthday">誕生日</label>
+    		<input type="date" class="form-control" th:field="*{birth}">
+  		</div>
+  	  	<div class="form-group">
+    		<label for="email">メールアドレス</label>
+    		<input type="email" class="form-control" th:field="*{email}">
+  		</div>
+  		<div class="form-group">
+    		<label for="phoneNumber">電話番号</label>
+    		<input type="tel" class="form-control" th:field="*{tel}">
+  		</div>
+  		<div class="form-group">
+    		<label for="zipcode">郵便番号</label>
+    		<input type="text" class="form-control" th:field="*{zipcode}">
+  		</div>
+
+  		<div class="form-group">
+    		<label for="address1">住所</label>
+    		<input type="text" class="form-control" th:field="*{address1}">
+  		</div>
+  		<div class="form-group">
+    		<label for="address2">住所２</label>
+    		<input type="text" class="form-control" th:field="*{address2}">
+  		</div>
+  		<div class="form-group">
+    		<label for="address3">住所３</label>
+    		<input type="text" class="form-control" th:field="*{address3}">
+  		</div>
+  		<div class="form-group">
+    		<label for="shcool">学校名</label>
+    		<input type="text" class="form-control" th:field="*{school1}">
+  		</div>
+  		<div class="form-group">
+    		<label for="school2">学部学科</label>
+    		<input type="text" class="form-control" th:field="*{school2}">
+  		</div>
+  		<div class="form-group">
+    		<label for="tokugi">特技</label>
+    		<input type="text" class="form-control" th:field="*{skill}">
+  		</div>
+
+ 	<input type="hidden" th:field="*{image}" th:value="${image}" >		
+	<input type="hidden" th:field="*{id}" th:value="*{id}" >
+  	<button type="submit" class="btn btn-primary">登録</button>
+  
+	</form>
+  </div>	
+ </div>		
+	
+	
+</body>
+</html>

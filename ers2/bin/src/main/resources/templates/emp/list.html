@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html　xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>メインページ</title>
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登録</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+	<nav class="navbar navbar-light bg-dark">
+  		<span class="navbar-brand mb-0 h1 text-white">ers</span>
+	</nav>
+  </header>
+  <div class="container">
+  
+  <form th:action="@{/emp/register}" method="get">
+  <button type="submit" class="btn btn-primary">登録</button>
+  </form>
+    <form th:action="@{/loginfo/loglist}" method="get">
+  <button type="submit" class="btn btn-primary">ログ</button>
+  </form>
+  
+  
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">姓</th>
+      <th scope="col">名</th>
+      <th scope="col">性別</th>
+      <th scope="col">部署</th>
+      <th scope="col">誕生日</th>
+      <th scope="col">メールアドレス</th>
+      <th scope="col">電話番号</th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">学歴</th>
+      <th scope="col">特技</th>
+      <th scope="col">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  th:each="employee : ${employees}">
+      <td th:text="${employee.lastName}"></td>
+      <td th:text="${employee.firstName}"></td>
+      <td th:text="${employee.gender}"></td>
+      <td th:text="${employee.dept}"></td>
+      <td th:text="${employee.birth}"></td>
+      <td th:text="${employee.email}"></td>
+      <td th:text="${employee.tel}"></td>
+      <td th:text="${employee.zipcode}"></td>
+      <td th:text="|${employee.address1}${employee.address2}${employee.address3}|"></td>
+      <td th:text="|${employee.school1}${employee.school2}|"></td>
+      <td th:text="${employee.skill}"></td>
+      <td>
+      
+      	 <div class="form-conf">
+      	  <form class="form1 d-inline" th:action="@{'/emp/detail/' + ${employee.id}}" method="get">
+      	  		<input type="hidden" name="id" th:value="${employee.id}">
+  				<button type="submit" class="btn btn-primary btn-sm">詳細</button>
+  		  </form>
+  		   <form class="form2 d-inline-block" th:action="@{'/emp/detail/' + ${employee.id}}" method="post">
+      	  		<input type="hidden" name="id" th:value="${employee.id}">
+  				<button type="submit" class="btn btn-danger btn-sm">削除</button>
+  		  </form>
+  		 </div>
+  		
+      </td>
+    </tr>
+
+  </tbody>
+</table>  
+
+  </div>
+
+</body>
+</html>

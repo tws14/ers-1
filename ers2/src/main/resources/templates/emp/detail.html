@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title></title>
+
+<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta th:name="_csrf" th:content="${_csrf.token}" />
+	<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+<title>詳細</title>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link th:href="@{/css/detail.css}" rel="stylesheet">
+     <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-light bg-dark container-fluid width=100%">
+			<span class="navbar-brand mb-0 h1 text-white">ers</span>
+		</nav>
+	</header>
+
+	<div class="main">
+		<div class="registerformhead">
+			<p style="font-size: 30px;">詳細</p>
+
+			<a class="far fa-arrow-alt-circle-left" id="back" th:href="@{/emp/list}"></a>
+			
+			<hr>
+
+		</div>
+
+		<p>
+			<img th:src="${employee.encodeBase64}" width="100" height="100">
+		</p>
+
+		<br> <br>
+
+		<div class="container">
+			<div class="detaillist">
+
+				<div class="propblock">
+					<div class="prop">名前</div>
+
+					<div class="prop">性別</div>
+
+					<div class="prop">部署</div>
+
+					<div class="prop">生年月日</div>
+
+					<div class="prop">メールアドレス</div>
+
+					<div class="prop">電話番号</div>
+
+					<div class="prop">郵便番号</div>
+
+					<div class="addressgyou">住所</div>
+
+					<div class="prop">学校</div>
+
+					<div class="prop">特技</div>
+				</div>
+
+				<div class="detailsblock">
+					<div class="details" th:text="|${employee.lastName} ${employee.firstName}|"></div>
+					<div class="details" th:text="${employee.gender}"></div>
+					<div class="details" th:text="${employee.dept}"></div>
+					<div class="details" th:text="${employee.birth}"></div>
+					<div class="details" th:text="${employee.email}"></div>
+					<div class="details" th:text="${employee.tel}"></div>
+					<div class="details" th:text="${employee.zipcode}"></div>
+					<div class="details" th:text="${employee.address1}"></div>
+					<div class="details" th:text="|${employee.address2} ${employee.address3}|"></div>
+					
+				<th:block th:if="${#strings.isEmpty(employee.address2) and #strings.isEmpty(employee.address3)}">
+							<br><br>
+				</th:block>	
+				
+					<div class="details" th:text="|${employee.school1} ${employee.school2}|"></div>
+					<div class="details" th:text="${employee.skill}"></div>
+				</div>
+
+			</div>
+
+
+			<div class="buttonarea">
+				<form th:action="@{'/emp/updateForm/' + ${employee.id}}" method="get">
+					<input type="hidden" name="employee" th:value="${employee.id}">
+					<button type="submit" class="btn btn-secondary" id="hensyu">編集</button>
+				</form>
+				<form id="delete" th:action="@{'/emp/rest/delete/' + ${employee.id}}" method="post">
+					<input type="hidden" name="id" th:value="${employee.id}">
+					<button type="button" id="sakujo" class="btn btn-danger">削除</button>
+				</form>
+				
+				<script type="text/javascript">
+					$(function() {
+						
+						let token = $("meta[name='_csrf']").attr("content");
+						let header = $("meta[name='_csrf_header']").attr("content");
+						
+						  $(document).ajaxSend(function(e, xhr, options) {						
+							  xhr.setRequestHeader(header, token);
+						  });
+						
+						$(document).on('click', "#delete button", function(){
+							
+						  if(confirm('削除します')){
+							  let del = $(this).parents("#delete");
+							  let id = del.find("id").val();
+							  
+							  $.ajax({
+								 type: del.attr('method'),
+								 url: del.attr('action'),
+								 cache: false,
+								 data: id,
+								 dataType: 'json',
+								 timeout: 6000,
+							  }).done(function(data, textStatus, jqXHR){
+								  alert("削除しました");
+								  window.location.href='/emp/list';
+							  }).fail(function(jqXHR, textStatus, errorThrown){
+								  console.log('form invalid');
+							  });
+						  } else {
+							  return false;
+						  }
+						  
+						});
+						
+					});
+				
+				</script>
+				
+				
+				
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
