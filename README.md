@@ -10,7 +10,7 @@
     lombok, Jackson-data-format, modelmappaer, jQuery.tablesorter, jQuery Validation
 ### 機能
 * 基本機能
-    - ログイン機能、社員一覧表示、登録、削除、詳細、編集、検索(全文、and)
+    - ログイン機能、社員一覧表示、登録、画像アップロード、削除、詳細、編集、検索(全文、and)
 * 追加機能
     - csvダウンロード/インポート、操作ログ一覧表示(ADMINユーザのみ可能)、削除者バックアップ一覧表示(ADMINユーザーのみ可能)
 
