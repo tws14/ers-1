@@ -12,10 +12,10 @@
 * 基本機能
     - ログイン機能、社員一覧表示、登録、削除、詳細、編集、検索
 * 追加機能
-    - 操作ログ一覧表示、　csvダウンロード/インポート、削除者バックアップ一覧表示<br>
-<br>
+    - 操作ログ一覧表示、csvダウンロード/インポート、削除者バックアップ一覧表示
+
 ### テーブル構成
-<br>
+
 ### 画面
 
 <img width="300" alt="login" src="https://user-images.githubusercontent.com/98932123/183318262-49579473-f1ca-4abe-a445-ff31b03a9d6c.png">　 <img width="300" alt="list" src="https://user-images.githubusercontent.com/98932123/183318328-e1f0a4d3-0e01-4983-b20e-5a07e7aaa54d.png">　 <img width="300" alt="search" src="https://user-images.githubusercontent.com/98932123/183318356-ac35c8f9-d944-4a24-92c5-c3f4304f9055.png"> 　<img width="346" alt="import" src="https://user-images.githubusercontent.com/98932123/183318433-d19fd0b5-14d8-4246-aabf-8bdad6cc20f1.png"> 
