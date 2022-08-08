@@ -15,6 +15,7 @@
     - 操作ログ一覧表示、csvダウンロード/インポート、削除者バックアップ一覧表示
 
 ### テーブル構成
+<img width="396" alt="table" src="https://user-images.githubusercontent.com/98932123/183320154-b418204c-142c-4d9b-8d62-bc0ef0e3f021.png">
 
 ### 画面
 
