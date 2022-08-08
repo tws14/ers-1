@@ -1,6 +1,18 @@
-# ers
-
-
+# ers（研修課題の社員登録システム）
+  ※今のところローカル環境でのみ起動
+## 使用技術
+* 言語/DB
+    - Java 11, Thymeleaf, html/css, JavaScript,jQuery  /Mysql 8.0.29
+* フレームワーク/ライブラリ
+    - Springboot5,bootstrap4
+* 依存関係、プラグイン、その他ツール
+    - Spring Data JPA,Validation,Security, AOP, Test
+    lombok, Jackson-data-format, modelmappaer, jQuery.tablesorter, jQuery Validation
+    # 機能
+* 基本機能
+    - ログイン機能、社員一覧表示、登録、削除、詳細、編集、検索
+* 追加機能
+    - 操作ログ一覧表示、　csvダウンロード/インポート、削除者バックアップ一覧表示
 
 
 
