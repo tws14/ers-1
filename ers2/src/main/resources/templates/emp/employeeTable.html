@@ -41,7 +41,12 @@
   													</thead>
   													<tbody>
     															 <tr th:each="employee : ${employees}">
+    														         <th:block th:if="${#strings.isEmpty(employee.image)}">
+    															 					<td><img th:src="@{/images/syoki.png}" width="40" height="40"></td>
+    															 	</th:block>
+    															 	<th:block th:if="!${#strings.isEmpty(employee.image)}">		
     																			<td><img th:src="${employee.encodeBase64}" width="40" height="40"></td>
+    																</th:block>
       																			<td class="text-nowrap" th:text="${employee.lastName}"></td>
       																			<td th:text="${employee.firstName}"></td>
       																			<td th:text="${employee.gender}"></td>

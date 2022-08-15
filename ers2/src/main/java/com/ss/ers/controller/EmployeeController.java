@@ -322,7 +322,7 @@ public class EmployeeController {
             
             Employee employee = modelMapper.map (form, Employee.class);
             
-            employee.setImage ("C:\\img\\profile\\syoki.png");
+            employee.setImage ("");
             
             employeeService.save (employee);
             
@@ -383,7 +383,7 @@ public class EmployeeController {
                                     .zipcode (column[7].replace ("　", " ")).address1 (column[8].replace ("　", " "))
                                     .address2 (column[9].replace ("　", " ")).address3 (column[10].replace ("　", " "))
                                     .school1 (column[11].replace ("　", " ")).school2 (column[12].replace ("　", " "))
-                                    .skill (column[13]).image ("C:\\img\\profile\\syoki.png").build ();
+                                    .skill (column[13]).image ("").build ();
                             
                             employeeService.save (employee);
                             

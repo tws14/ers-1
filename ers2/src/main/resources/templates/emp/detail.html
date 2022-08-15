@@ -36,7 +36,12 @@
 		</div>
 
 		<p>
+		<th:block th:if="${#strings.isEmpty(employee.image)}">
+			<img th:src="@{/images/syoki.png}" width="100" height="100">
+		</th:block>
+		<th:block th:if="!${#strings.isEmpty(employee.image)}">
 			<img th:src="${employee.encodeBase64}" width="100" height="100">
+		</th:block>
 		</p>
 
 		<br> <br>

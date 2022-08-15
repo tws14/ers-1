@@ -50,12 +50,17 @@
 			<div class="registerform">
 				<form id="register-form" th:action="@{/emp/update}"
 					th:object="${employee}" enctype="multipart/form-data" method="post">
-
+					
+				<th:block th:if="${#strings.isEmpty(employee.image)}">
+					<img id="imageView" th:src="@{/images/syoki.png}" width="100" height="100" alt="">
+				</th:block>
+				
+				<th:block th:if="!${#strings.isEmpty(employee.image)}">
 					<img id="imageView" th:src="*{encodeBase64}" width="100"
-						height="100" alt=""> <input type="file"
-						th:field="*{imageForm}" accept="image/*"
-						onchange="changedImage(this);">
-
+						height="100" alt="">
+				</th:block> 
+				<input type="file" th:field="*{imageForm}" accept="image/*" onchange="changedImage(this);">
+			
 					<script>
 					function changedImage(img) {
 						var fileReader = new FileReader();
