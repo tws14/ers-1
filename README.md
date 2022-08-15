@@ -3,7 +3,7 @@
 ### 使用技術
 * 言語/DB
     - Java 11, Thymeleaf, html/css, JavaScript,jQuery  /Mysql 8.0.29
-* フレームワーク/ライブラリ
+* フレームワーク
     - Springboot5,bootstrap4
 * 依存関係、プラグイン、その他ツール
     - Spring Data JPA,Validation,Security, AOP, Test
